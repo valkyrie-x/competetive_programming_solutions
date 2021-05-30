@@ -1,0 +1,102 @@
+#include<iostream>
+#include<cstdio>
+#include<cstdlib>
+using namespace std;
+
+struct node
+{
+	int info;
+	node*next;
+	
+}*top;
+class stack
+{
+	public:
+		stack()
+		{
+			top=NULL;
+		}
+		void push(int val)
+		{	
+			node* newnode=new node;
+			newnode->info=val;
+			newnode->next=NULL;
+			if (top==NULL)
+			{
+				top=newnode;
+			}
+			else 
+			{
+				newnode->next=top;
+				top=newnode;
+			}
+			
+		}
+		
+		void pop()
+		{	
+			node* newnode=new node;
+			if (top==NULL)
+			{
+				cout<<"\nunderflow";
+				return;
+			}
+			else 
+			{
+			newnode=top;
+			top=top->next;
+			delete newnode;	
+			}
+		}
+		void disp()
+		{
+			node* start=new node;
+			start=top;
+			if (top==NULL)
+			{
+				cout<<"\nempty";
+				return;
+			}
+			cout<<"\n";
+			while(start!=NULL)
+			{
+				cout<<start->info<<"->";
+				start=start->next;
+				
+			}
+			cout<<"NULL";
+			
+		}
+};
+int main()
+{
+stack Stack;
+	
+	int ch=1,x;
+	while(ch)
+	{
+	
+	cout<<"\nselect option:";
+	cout<<"\n1.display";
+	cout<<"\n2.push";
+	cout<<"\n3.pop";
+	cin>>x;
+	switch(x)
+	{
+	case 1: Stack.disp();
+			break;
+	case 2: cout<<"enter value";
+			int val;
+			cin>>val;
+			Stack.push(val);
+			break;
+	case 3: Stack.pop();
+			break;
+	default:cout<<"\ninvalid";
+	}		
+	cout<<"\ncontinue?1/0";
+	cin>>ch;
+	}
+	return 0;
+}					
+

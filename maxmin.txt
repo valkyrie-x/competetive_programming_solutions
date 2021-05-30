@@ -1,0 +1,87 @@
+#include <iostream>
+
+using namespace std;
+
+int calcmax(int a[],int start,int stop,  int n)
+{   
+    int max;
+	if(n==1)
+	{
+		return max=a[start];
+		
+	} 
+	else if(n==2)
+	{
+		if(a[start]>a[stop])
+		return max=a[start];
+		else 
+		return max=a[stop];
+		
+	}
+	else if(n%2==0)
+	{
+	int max1=calcmax(a,start,(start+stop)/2,n/2);
+    int max2=calcmax(a,(start+stop)/2+1,stop,n/2);
+	max=(max1>max2)?max1:max2;
+	return max;
+	}
+	else 
+	{
+	int max1=calcmax(a,start,(start+stop)/2,n/2+1);
+    int max2=calcmax(a,(start+stop)/2+1,stop,n/2);
+	max=(max1>max2)?max1:max2;
+	return max;
+    }  
+	
+}
+int calcmin(int a[],int start,int stop,  int n)
+{   
+   int min;
+	if(n==1)
+	{
+		min=a[start];
+		
+	} 
+	else if(n==2)
+	{
+		if(a[start]<a[stop])
+		 min=a[start];
+		else 
+	    min=a[stop];
+		
+	}
+  else if(n%2==0)
+	{
+	int min1=calcmin(a,start,(start+stop)/2,n/2);
+    int min2=calcmin(a,(start+stop)/2+1,stop,n/2);
+	min=(min1<min2)?min1:min2;
+	 
+	}
+	else 
+	{
+	int min1=calcmin(a,start,(start+stop)/2,n/2+1);
+    int min2=calcmin(a,(start+stop)/2+1,stop,n/2);
+	min=(min1<min2)?min1:min2;
+	 
+    } 
+	return min; 
+}
+
+
+int main() 
+{
+	int a[10],i;
+	cout<<"enter the array";
+	for(i=0;i<10;i++)
+	cin>>a[i];
+	int maximum=calcmax(a,0,9,10);
+	int minimum=calcmin(a,0,9,10);
+	cout<<"maximum is:"<<maximum<<" ";
+	cout<<"minimum is:"<<minimum;
+	
+
+	return 0;
+}
+
+
+

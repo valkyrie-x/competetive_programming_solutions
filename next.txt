@@ -1,0 +1,14 @@
+#include <stdio.h>
+#include <iostream>
+using namespace::std;
+int main()
+{
+  int s,p;
+ cin>>s;
+  
+  p=(s/2)*((2*7)+(s-1)*7);
+  
+  cout<<p;
+  return 0;
+
+}

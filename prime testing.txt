@@ -1,0 +1,47 @@
+#include<iostream>
+#include<cstdio>
+#include<cmath>
+#include<cstdlib>
+using namespace std;
+int main()
+{	
+	int n,i,a[100],j,flag=0;
+	cout<<"enter no of test cases\n";
+	cin>>n;
+	cout<<"\nenter test cases\n";
+	
+	for(i=0;i<n;i++)
+	{
+		cin>>a[i];
+	}
+	
+	for(i=0;i<n;i++)
+	{	
+		if(a[i]<=1)
+		cout<<"no\n";
+		
+		else if(a[i]<=3)
+		cout<<"yes\n";
+		
+		
+		else
+		{	
+			flag=0;
+			for(j=2;j*j<=a[i];j++)
+			{	
+				if((a[i]%j)==0)		//if no divisible by test no j
+				{
+					flag=1;
+					cout<<"no\n";
+					
+					break;
+				}
+				
+			}
+			if(flag==0)
+			cout<<"yes\n";
+		}
+	
+	}
+return 0;
+}

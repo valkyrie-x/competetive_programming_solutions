@@ -1,0 +1,104 @@
+#include<iostream>
+#include<cstdio>
+#include<cstdlib>
+using namespace std;
+
+struct node
+{
+	int info;
+	node*next;
+	
+}*front,*rear;
+class Queue
+{
+	public:
+		stack()
+		{
+			front=NULL;
+			rear =NULL;
+		}
+		void add(int val)
+		{	
+			node* newnode=new node;
+			newnode->info=val;
+			newnode->next=NULL;
+			if (front==NULL)
+			{
+				front=newnode;
+				rear=newnode;
+			}
+			else 
+			{
+				rear->next=newnode;
+				rear=newnode;
+			}
+			
+		}
+		
+		void del()
+		{	
+			node* newnode=new node;
+			if (front==NULL)
+			{
+				cout<<"\nunderflow";
+				return;
+			}
+			else 
+			{
+			newnode=front;
+			front=front->next;
+			delete newnode;	
+			}
+		}
+		void disp()
+		{
+			node* start=new node;
+			start=front;
+			if (front==NULL)
+			{
+				cout<<"\nempty";
+				return;
+			}
+			cout<<"\n";
+			while(start!=NULL)
+			{
+				cout<<start->info<<"->";
+				start=start->next;
+				
+			}
+			cout<<"NULL";
+			
+		}
+};
+int main()
+{
+Queue qu;
+	
+	int ch=1,x;
+	while(ch)
+	{
+	
+	cout<<"\nselect option:";
+	cout<<"\n1.display";
+	cout<<"\n2.add";
+	cout<<"\n3.delete";
+	cin>>x;
+	switch(x)
+	{
+	case 1: qu.disp();
+			break;
+	case 2: cout<<"enter value";
+			int val;
+			cin>>val;
+			qu.add(val);
+			break;
+	case 3: qu.del();
+			break;
+	default:cout<<"\ninvalid";
+	}		
+	cout<<"\ncontinue?1/0";
+	cin>>ch;
+	}
+	return 0;
+}					
+

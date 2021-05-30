@@ -1,0 +1,151 @@
+#include<iostream>
+#include<cstdio>
+#include<cstdlib>
+using namespace std;
+
+struct node
+{
+	char info;
+	node*next;
+	
+}*top;
+
+char a='{',b='}',c='[',d=']',e='(',f=')';
+class Stack
+{
+	public:
+		Stack()
+		{
+			top=NULL;
+		}
+		void push(char val)
+		{	
+			node* newnode=new node;
+			newnode->info=val;
+			newnode->next=NULL;
+			if (top==NULL)
+			{
+				top=newnode;
+			}
+			else 
+			{
+				newnode->next=top;
+				top=newnode;
+			}
+			
+		}
+		
+		void pop()
+		{	
+			node* newnode=new node;
+			if (top==NULL)
+			{
+				cout<<"\nunderflow";
+				return;
+			}
+			else 
+			{
+			newnode=top;
+			top=top->next;
+			delete newnode;	
+			}
+		}
+		void clear()
+		{ 
+		
+		while(top!=NULL)
+		{
+			this->pop();
+		}
+		}
+		
+		
+		void disp()
+		{
+			node* start=new node;
+			start=top;
+			if (top==NULL)
+			{
+				cout<<"\nempty";
+				return;
+			}
+			cout<<"\n";
+			while(start!=NULL)
+			{
+				cout<<start->info<<"->";
+				start=start->next;
+				
+			}
+			cout<<"NULL";
+			
+		}
+		void check()
+		{
+			if(top==NULL)
+			cout<<"\nbalanced";
+			else  
+			{
+			cout<<"\nunbalanced";
+			}
+			
+		}
+		void add(char ch)
+		{
+	
+		if(ch==a||ch==c||ch==e||top==NULL)
+		
+		
+		this->push(ch);
+ 	    
+		else if(ch==b&&top->info==a)
+		{	
+			this->pop();	
+			
+		}	
+		else if(ch==d&&top->info==c)
+		{	
+			this->pop();	
+			
+		}
+		else if(ch==f&&top->info==e)
+		{	
+			this->pop();	
+			
+		}		
+				
+			
+			
+			
+			else 
+			
+				this->push(ch);
+				
+			
+		}
+		
+};
+int main()
+{	
+	Stack stack;
+	int i=0,x=1;
+	char s[100];
+	while(x)
+	{
+	cout<<"\nenter the sequence of braces";
+	cin>>s;
+	i=0;
+	while(s[i]!='\0')
+	{
+	
+	stack.add(s[i]);	
+	i++;
+	
+	}
+	stack.check();
+	stack.clear();
+	stack.disp();	
+	  cout<<"\ncontinue?1/0";
+	  cin>>x;
+    }
+	return 0;
+}

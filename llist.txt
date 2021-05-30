@@ -1,0 +1,226 @@
+#include<iostream>
+#include<cstdio>
+#include<cstdlib>
+using namespace std;
+
+struct node
+
+{	int info;
+	node*next;
+}*start;
+
+class llist
+{
+	public:
+	
+	node* create_node(int);
+	void add_front();
+	void add_back();
+	void add_pos();
+	void disp();
+	void del_pos();  
+	void search();
+		
+	llist()
+	{
+	start=NULL;
+	}
+};
+node* llist::create_node(int val)
+{
+	node* new_node= new node;	
+	if(new_node==NULL)
+	{	cout<<"\nno memory";
+		return 0;
+	}
+	new_node->info=val;
+	new_node->next=NULL;
+	return new_node;
+}
+
+void llist::search()
+{	
+	int val,count=0,flag=0;
+	cout<<"enter element whose position is to be searched for";
+	cin>>val;
+	node* temp=new node;
+	temp=start;
+	while(temp!=NULL)
+	{
+	count++;
+	if(temp->info==val)
+	{
+	cout<<"\n found at pos:"<<count;
+	flag=1;
+	break;
+	}
+	temp=temp->next;		
+	}
+	if(flag==0)
+	cout<<"\n not found";	
+	
+}
+
+void llist::add_front()
+	{
+		
+	int val;
+	cout<<"\nenter value to be inserted";
+	cin>>val;
+	node* new_n=create_node(val);
+	
+	
+	if (start==NULL)
+	{
+		start=new_n;
+		start->next=NULL;
+	}	
+	else
+	{
+		new_n->next=start;
+		start=new_n;
+	}
+	
+}
+void llist::add_back()
+{
+	int val;
+	cout<<"\nenter value to be inserted";
+	cin>>val;
+	node* new_n=create_node(val);
+	node* temp=new node;
+	if (start==NULL)
+	{
+		start=new_n;
+		start->next=NULL;
+	}		
+	
+	temp=start;
+	
+	while((temp->next)!=NULL)
+	{
+		temp=temp->next;
+	}
+	temp->next=new_n;
+		
+	
+}
+void llist::add_pos()
+{	
+	int val;
+	
+	node* new_n=create_node(val);
+	
+	int pos,count=0;
+	cout<<"\nenter position";
+	cin>>pos;
+	node* temp=new node;	
+	temp=start;
+	
+	if(pos<1)
+	{
+	cout<<"\n invalid";
+	return;
+	}
+	
+	while(temp!=NULL)
+	{
+		count++;
+		if(count==(pos-1))
+		{
+		new_n->next=temp->next;
+		temp->next=new_n;
+		break;
+		}
+		temp=temp->next;
+	}
+	 
+	if(count<pos)
+	cout<<"\nout of range";
+		
+}
+void llist::del_pos()
+{	
+
+	int pos,count=0;
+	cout<<"\nenter position to be deleted";
+	cin>>pos;
+	node* temp=new node;	
+	temp=start;
+	node* del=new node;
+	if(pos<1)
+	{
+	cout<<"\n invalid";
+	return;
+	}
+	if(pos==1)						
+	{
+		del=start;
+		start=start->next;
+		delete del;
+		return;	
+	}
+	
+	while(temp!=NULL)
+	{
+		count++;
+		if(count==(pos-1))
+		{
+		del=temp->next;
+		temp->next=del->next;
+		delete del;	
+		break;
+		}
+		temp=temp->next;
+	}
+}
+void llist::disp()
+{
+	node* temp=new node;	
+	temp=start;
+	cout<<"\n";
+	while(temp!=NULL)
+	{
+		cout<<temp->info<<"->";
+		temp=temp->next;
+	}
+	cout<<"NULL";
+	
+}
+
+int main()
+{	
+	llist ll;
+	
+	int ch=1,x;
+	while(ch)
+	{
+	
+	cout<<"\nselect option:";
+	cout<<"\n1.display";
+	cout<<"\n2.add front";
+	cout<<"\n3.add back";
+	cout<<"\n4.add pos";
+	cout<<"\n5.del pos";
+	cout<<"\n6.search";
+	cin>>x;
+	switch(x)
+	{
+	case 1: ll.disp();
+			break;
+	case 2: ll.add_front();
+			break;
+	case 3: ll.add_back();
+			break;
+	case 4: ll.add_pos();
+			break;
+	case 5: ll.del_pos();
+			break;
+	case 6: ll.search();
+			break;
+	}		
+	cout<<"\ncontinue?1/0";
+	cin>>ch;
+	}
+	return 0;
+}					

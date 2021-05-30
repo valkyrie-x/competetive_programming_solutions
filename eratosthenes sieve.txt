@@ -1,0 +1,40 @@
+#include <cmath>
+#include <cstdio>
+#include <string.h>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+
+bool p[5000001];
+
+void sieve() {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    
+    memset(p, 1, 5000000);
+    p[0] = p[1] = 0;
+    for (int i = 2; i * i < 5000001; ++i)
+        if (p[i])
+            for (int j = i*2; j < 5000001; j += i)
+                p[j] = 0;
+}
+int main()
+{
+    int n, x;
+	
+    sieve();
+    cin >> n;
+    while ( n--)
+    { cin>>x;
+        if(p[x])
+
+            cout<<"yes";
+     else cout<<"no";
+           cout<<"\n";
+    }
+    return 0;
+}
+

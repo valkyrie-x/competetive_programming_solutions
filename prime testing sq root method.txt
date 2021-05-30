@@ -1,0 +1,41 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+#define ul unsigned long long
+
+bool prime_num(ul n){
+    // corner cases
+    if(n<=1)return false;
+    if(n<=3)return true;
+
+    // Below code is checked so that we can skip middle 5 numbers in the later while loop
+    if(n%2==0 || n%3==0)return false;
+
+    ul i=5;
+    while(i*i<=n){
+        if(n%i==0 || n%(i+2)==0)return false;
+        i+=6;
+    }
+
+    return true;
+}
+
+int main() {
+    ul s, e;
+    cin >> s >> e;
+    
+    ul count = 0;
+    for(ul i = s; i <= e; i++){
+        if(prime_num(i))
+            count += 1;
+    }
+    
+    cout << count;
+    
+    return 0;
+}
+

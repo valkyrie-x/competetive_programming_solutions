@@ -1,0 +1,39 @@
+#include <cmath>
+#include <cstdio>
+#include <string.h>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int main() 
+{
+   char a[1000],b[1000],c[1000];
+    cin>>a>>b;
+    int i=0;
+    cout<<sizeof(a)<<"   ";
+    cout<<sizeof(a[0])<<"   ";
+    int s1=sizeof(a)/sizeof(a[0]);
+    cout<<s1;*/
+    
+
+
+    /*while(a[i]!='\0')
+    {
+        if(((a[i]-48)+(b[i]-48))==1)
+            c[i]='1';
+        else c[i]='0';
+        i++;
+    }
+    i=0;
+    
+    while(c[i]!='\0')
+    {
+        cout<<c[i];
+        i++;
+    }*/	
+    
+    return 0;
+}
+
+

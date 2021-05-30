@@ -1,0 +1,32 @@
+#include <cmath>
+#include <cstdio>
+
+#include <string>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+
+int main() 
+{
+    int n,i=-1;
+    string s;
+int a;
+cin>>a;
+    while(a)
+    {
+        n=a%26;
+        if(n==0)
+            s[++i]='Z';
+        else 
+        {
+            s[++i]=char(64+n);
+        }
+        a/=26;
+    }
+   
+    cout<<s;
+    return 0;
+}
+
+   

@@ -1,0 +1,310 @@
+//#include<iostream>
+//#include<cstdio>
+//#include<cstdlib>
+#include <bits/stdc++.h>
+using namespace std;
+struct node
+{
+    int info;
+     node* left;
+     node* right;
+}*root;
+
+class bst
+{	
+	public:
+	bst()
+	{
+		root=NULL;
+		
+	}
+	node* create(int val)
+	{
+		node* newnode=new node;
+		newnode->left=NULL;
+		newnode->right=NULL;
+		newnode->info=val;
+		return newnode;
+	}
+int maxdepth(node* tree)
+	{	if(tree==NULL)
+		return 0;
+	
+		static int depth=0;
+		static int ldepth=0;
+		static int rdepth=0;
+		ldepth=maxdepth(tree->left);
+		rdepth=maxdepth(tree->right);
+		depth=(ldepth>rdepth)?ldepth:rdepth;
+		return depth+1;
+	}
+	
+void levelorder()
+{
+	queue<node*> q;
+	node* temp=root;
+	cout<<"\n";
+	
+	while(temp)
+	{
+		cout<<temp->info<<" ";
+		if(temp->left)q.push(temp->left);
+		if(temp->right)q.push(temp->right);
+		temp=q.front();
+		
+		q.pop();
+	
+	}	
+}
+void leftv(node* tree,int level,int* maxlevel)
+{	
+	if(tree==NULL)
+    {
+    	cout<<"\n tree is NULL";
+    	return;
+	}
+   
+    cout<<"\nreached for "<<tree->info<<" :as root "<<level<<" :as level "<<*maxlevel<<" as maxlevel";
+    if(level>*maxlevel)
+    {
+        cout<<tree->info<<" ";
+        *maxlevel=level;
+        
+    }
+    leftv(tree->left,level+1,maxlevel);
+    leftv(tree->right,level+1,maxlevel);
+}
+void leftView(node *root)
+{
+  int maxlevel=0;
+  leftv(root,1,&maxlevel);
+}
+	
+void insert(node* tree,node* newnode)
+{	
+	if(root==NULL)
+	{
+		cout<<"\nreached 1";
+		root=newnode;	
+		cout<<"\n"<<root->info;
+	}
+	else if(tree->info==newnode->info)
+		
+	{	
+		cout<<"\nreached 2";
+		cout<<"\nnode already exists on the tree";
+		return;
+	}
+	else if(tree->info>newnode->info)
+	{
+		cout<<"\nreached 3";
+		if(tree->left==NULL)
+		{
+			tree->left=newnode;
+			return;
+		}
+		else
+		{
+			insert(tree->left,newnode);
+		}
+			
+		}
+		else if(tree->info<newnode->info)
+		
+		{
+			cout<<"\nreached 4";
+			if(tree->right==NULL)
+			{
+				tree->right=newnode;
+				return;
+			}
+			else
+			{
+				insert(tree->right,newnode);
+			}
+			
+		}
+		
+		
+	}
+	void inorder(node* tree)
+	{
+	
+		//print left subtree
+		if(tree->left!=NULL)
+		this->inorder(tree->left);
+
+		//print root
+		cout<<tree->info<<"->";
+		
+		//print right subtree
+		if(tree->right!=NULL)
+		
+		this->inorder(tree->right);
+	}
+
+ 
+
+	void preorder(node* tree)
+	{
+	
+		//print root
+		cout<<tree->info<<"->";
+
+		//print left subtree
+		if(tree->left!=NULL)
+		this->preorder(tree->left);
+
+		//print right subtree
+		if(tree->right!=NULL)
+		this->preorder(tree->right);
+	}
+	void postorder(node* tree)
+	{
+	
+		//print left subtree
+		if(tree->left!=NULL)
+		
+		this->postorder(tree->left);
+		//print right subtree
+		if(tree->right!=NULL)
+		this->postorder(tree->right);
+		//print root
+		cout<<tree->info<<"->";
+	}
+	node* del(node* tree, int val)
+	{
+		if(root==NULL)
+		{
+			cout<<"\nunderflow";
+			return root;
+		}
+		else if(tree->info>val)
+		{
+			tree->left=del(tree->left,val);
+		}
+		else if(tree->info<val)
+		{
+			tree->right=del(tree->right,val);
+		}
+		else
+		{
+			//node with no chidren
+			if(tree->left==NULL and tree->right==NULL)
+			{
+				delete tree;
+				return NULL;
+				
+			}
+			//only one child
+			if(tree->left==NULL)
+			{
+				node* temp=new node;
+				temp=tree->right;
+				delete tree;
+				return temp;
+			}
+			if(tree->right==NULL)
+			{
+				node* temp=new node;
+				temp=tree->left;
+				delete tree;
+				return temp;
+			}
+			// tree has 2 children
+			else
+			{
+				struct node* temp= findbase(tree->right);
+				tree->info=temp->info;
+				tree->right=del(tree->right,temp->info);
+				return tree;				
+			}
+		}
+		return tree;
+	
+		
+	}
+	node* findbase(node* tree)
+	{
+		while(tree->left!=NULL)
+		{
+			tree=tree->left;
+		}
+		return tree;	
+	}
+	
+	
+	
+};
+int main()
+{
+  bst b;
+  int d;
+	
+	int ch=1,x;
+	node* newn=new node;
+	cout<<"\nselect option:";
+	cout<<"\n1.display";
+	cout<<"\n2.insert";
+	cout<<"\n3.delete";
+	cout<<"\n4.inorder";
+	cout<<"\n5.preorder";
+	cout<<"\n6.postorder";
+	cout<<"\n7.leftview";
+	cout<<"\n8.levelorder";
+	cout<<"\n9.depth";
+
+	while(ch)
+	{
+	
+	cin>>x;
+	int g;
+	switch(x)
+	{
+	case 1: cout<<"not yet";
+			break;
+	case 2: int val;
+			cout<<"\nenter 10 values";
+			for(g=0;g<10;g++)
+			{
+			cin>>val;
+			newn=b.create(val);
+			b.insert(root,newn);
+			}
+			break;
+	case 3: cout<<"\nenter value to be deleted";
+			cin>>val;	
+			root=b.del(root,val);
+	        break;
+	case 4: cout<<"\n the tree inorder is:\n";	
+			b.inorder(root);
+			cout<<"NULL";
+			break;
+	case 5: cout<<"\n the tree preorder is:\n";	
+			b.preorder(root);
+			cout<<"NULL";
+			break;
+			
+	case 6: cout<<"\n the tree postorder is:\n";	
+			b.postorder(root);
+			cout<<"NULL";
+			break;
+	case 7:	cout<<"\n leftview is:\n";
+			b.leftView(root);
+			break;
+	case 8:	cout<<"\n levelorder is:\n";
+			b.levelorder();
+			break;
+	case 9:	cout<<"\n depth is:\n";
+			g=b.maxdepth(root);
+			cout<<g;
+			break;
+	
+	default : cout<<"\ninvalid";
+	}		
+	cout<<"\ncontinue?1/0";
+	cin>>ch;
+	}
+	return 0;
+}					
+

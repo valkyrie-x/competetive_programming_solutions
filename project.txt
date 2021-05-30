@@ -1,0 +1,60 @@
+#include <iostream>
+using namespace std;
+class barn
+{
+	long long n,m,current;
+    int daycount;
+    
+    public:
+	barn(long long x,long long y)
+	{
+		daycount=0;
+		n=x;
+		m=y;
+	    current=n;
+	}
+	void incUpdate()
+	{
+		daycount++;
+		if ((current+m)<=n)
+		current+=m;
+		else current=n;
+	}
+	void display()
+	{
+	 	cout<<"No. of days in which current stock becomes zero is: "<<daycount;
+	} 
+	bool check()
+	{
+		if(current)
+			return 1;
+			
+		return 0;
+	}
+	void decUpdate()
+	{
+		current-=daycount;
+		if(current<0)
+		current=0;		
+	}
+	
+};
+int main()
+{
+	long long a,b;
+	cout<<"\t\t\tWelcome to my Barn";
+	cout<<"\n\n\tEnter the capacity: ";
+	cin>>a;
+	cout<<"\tEnter the no of grains added per day: ";
+	cin>>b;
+	barn B(a,b);		
+	while(B.check())
+	{
+		B.incUpdate();
+		B.decUpdate();
+	}
+	B.display();
+	return 0;
+}
+
+

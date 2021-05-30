@@ -1,0 +1,80 @@
+#include <iostream>
+using namespace std;
+void sort(float value[],int profit[],int weight[])
+{  
+    int i,j,temp;
+    float temp2;
+	for(i=0;i<10;i++)
+	{
+	for(j=0;j<10;j++)
+	if(value[j]<value[j+1])
+     {
+	temp2=value[j];
+	value[j]=value[j+1];
+	value[j+1]=temp2;
+	temp=profit[j];
+	profit[j]=profit[j+1];
+	profit[j+1]=temp;	
+	temp=weight[j];
+	weight[j]=weight[j+1];
+ 	weight[j+1]=temp;
+     } 
+    }  
+
+}
+
+int main()
+{ 
+  int x,profit[10],weight[10],sack=20;
+  float value[10],part[10];
+  cout<<"enter the price and weight for 10 items in order";
+  for(x=0;x<10;x++)
+  {
+    cin>>profit[x]>>weight[x];
+    value[x]=((float)profit[x])/((float)weight[x]);
+  }
+  
+  sort(value,profit,weight);
+  cout<<"\n";
+  cout<<"profit\t"<<"weight\t"<<"value\n";
+  for(x=0;x<10;x++)
+  cout<<profit[x]<<"\t"<<weight[x]<<"\t"<<value[x]<<"\n";  
+  cout<<"\n";
+  cout<<"limit of sack=20";                                  
+  x=0;
+  while(sack>0)
+  {
+  	if(weight[x]<=sack)
+  	{
+  		part[x]=1;
+  	}
+    else
+	{
+	  	part[x]=(float)sack/(float)weight[x];  
+	}
+	sack=(float)sack-(float)part[x]*(float)weight[x];
+	x++;
+	if (part[x-1]<1) 
+	break;
+    
+	  
+  }
+   if (x<10)
+   {
+   while(x<10)
+   	{
+	   part[x]=0;
+   	   x++;
+	   }
+   }
+   
+  
+   x=0;
+   cout<<"\nThe new fractional parts are:\n";            
+   while(x<10)
+  {
+  	cout<<part[x]<<endl;
+  	x++;
+}
+  return 0;
+}
